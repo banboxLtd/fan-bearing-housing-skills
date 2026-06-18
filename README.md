@@ -1,7 +1,7 @@
 # Banbox 风机轴承座 Skill
 # Fan Bearing Housing Procurement Skill
 
-> Banbox 官方 AI 采购助手 Skill —— 选型 / 库存 / 报价一站搞定
+> Banbox 官方 AI 采购助手 Skill —— 选型 / 查询  / 库存 / 报价一站搞定
 > Official Banbox AI procurement skill — product search, stock check, and quote generation in one place.
 
 ---
@@ -10,13 +10,13 @@
 
 直接把下面这句话发给你的 AI 助手：
 
-> 帮我安装 Banbox 风机轴承座 Skill，仓库地址：`https://github.com/banbox/banbox-fan-bearing-housing-skill`
+> 帮我安装 Banbox 风机轴承座 Skill，仓库地址：`https://github.com/banboxLtd/fan-bearing-housing-skills.git`
 
 Agent 会自动克隆仓库、读取 `skill.json` 连接 MCP server，下次启动即可使用。
 
 Send this to your AI agent:
 
-> Install the Banbox fan bearing housing skill from: `https://github.com/banbox/banbox-fan-bearing-housing-skill`
+> Install the Banbox fan bearing housing skill from: `https://github.com/banboxLtd/fan-bearing-housing-skills.git`
 
 ---
 
@@ -25,8 +25,8 @@ Send this to your AI agent:
 ### Claude Code
 
 ```bash
-git clone https://github.com/banbox/banbox-fan-bearing-housing-skill.git \
-  ~/.claude/skills/banbox-fan-bearing-housing-skill
+git clone https://github.com/banboxLtd/fan-bearing-housing-skills.git \
+  ~/.claude/skills/fan-bearing-housing-skills
 ```
 
 ### Cursor / 其他支持 MCP Streamable HTTP 的客户端
@@ -82,12 +82,12 @@ Pricing requires a free account. The AI assistant will guide you through registr
 ## MCP Server 信息 / MCP Server Info
 
 - **Transport**: Streamable HTTP
-- **Endpoint**: `https://mcp.banbox.cn/mcp`
+- **Endpoint**: `https://ai.fanbearinghousing.com/mcp`
 - **Auth**: 无需额外鉴权，apiKey 通过工具 `context` 字段传入
 
 ---
 
 ## 联系我们 / Contact
 
-- 网站 / Website: [www.fanbearinghousing.ccom](https://www.fanbearinghousing.com)
+- 网站 / Website: [www.fanbearinghousing.com](https://www.fanbearinghousing.com)
 - 邮箱 / Email: sales@fanbearinghousing.com
