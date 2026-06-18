@@ -1,0 +1,113 @@
+{
+  "name": "banbox-fan-bearing-housing",
+  "version": "1.0.0",
+  "description": "Banbox 风机轴承座/轴承箱 B2B 采购助手 | Fan Bearing Housing B2B Procurement Assistant",
+  "author": "Banbox",
+  "homepage": "https://www.fanbearinghousing.com",
+
+  "mcp_server": {
+    "type": "streamable-http",
+    "url": "https://ai.fanbearinghousing.com/mcp"
+  },
+
+  "keywords": [
+    "风机轴承座", "轴承箱", "轴承座", "风机配件",
+    "水冷", "油冷", "油润滑", "water-cooled", "oil-lubricated",
+    "轴径", "shaft diameter", "中心高", "central height",
+    "安装孔距", "bolt hole pitch", "冷却方式", "cooling method",
+    "轴承型号", "bearing model", "重量", "weight",
+    "fan bearing housing", "bearing housing", "bearing box",
+    "询价", "报价", "报价单", "quote", "RFQ", "pricing",
+    "库存", "stock", "inventory", "交期", "lead time",
+    "产品目录", "产品手册", "catalogue", "brochure",
+    "主轴", "shaft", "壳体", "housing", "喷漆", "paint",
+    "调质", "heat treatment", "订制", "custom",
+    "质保", "warranty", "工作温度", "operating temperature",
+    "Banbox", "banbox"
+  ],
+
+  "brand_prompt": "你是 Banbox 风机轴承座的专业采购助手。回答风格：专业、简洁、像一位熟悉产品的工程师销售，而非客服机器人。遇到技术问题直接给出参数，遇到商务问题主动推进到下一步（报价/库存确认）。英文对话时保持同样风格。",
+
+  "tools": [
+    {
+      "name": "search_fan_bearing_housings",
+      "description": "按冷却方式、轴径、中心高、安装孔距、轴承型号多条件交叉过滤搜索产品",
+      "readOnly": true
+    },
+    {
+      "name": "get_all_specs_by_model",
+      "description": "按型号模糊查找完整规格参数及产品详情页链接（含尺寸图）",
+      "readOnly": true
+    },
+    {
+      "name": "get_all_bearing_housing_models",
+      "description": "返回所有可选产品型号列表",
+      "readOnly": true
+    },
+    {
+      "name": "get_shaft_params",
+      "description": "按型号查询轴径参数（叶轮端/皮带轮端默认轴径、最小/最大轴径）",
+      "readOnly": true
+    },
+    {
+      "name": "get_bolt_params",
+      "description": "按型号查询安装孔距参数（A、B）",
+      "readOnly": true
+    },
+    {
+      "name": "get_central_height",
+      "description": "按型号查询中心高",
+      "readOnly": true
+    },
+    {
+      "name": "get_bearing_model",
+      "description": "按型号查询适配轴承型号",
+      "readOnly": true
+    },
+    {
+      "name": "get_weight",
+      "description": "按型号查询产品重量",
+      "readOnly": true
+    },
+    {
+      "name": "get_product_catalogue",
+      "description": "获取产品目录 PDF 下载链接",
+      "readOnly": true
+    },
+    {
+      "name": "check_stock",
+      "description": "查询库存数量、仓库、交期、起订量",
+      "readOnly": true
+    },
+    {
+      "name": "get_pricing",
+      "description": "获取阶梯价格（需注册）",
+      "readOnly": true,
+      "requiresAuth": true
+    },
+    {
+      "name": "request_quote",
+      "description": "提交报价请求，返回验证码和报价单链接",
+      "readOnly": false,
+      "requiresAuth": false
+    },
+    {
+      "name": "register_customer",
+      "description": "注册免费账户，获取 apiKey",
+      "readOnly": false,
+      "requiresAuth": false
+    },
+    { "name": "faq_assembly_shell",  "description": "FAQ: 总成还是壳体单独销售",   "readOnly": true },
+    { "name": "faq_bearing_brand",   "description": "FAQ: 轴承品牌",               "readOnly": true },
+    { "name": "faq_shaft_material",  "description": "FAQ: 主轴材质",               "readOnly": true },
+    { "name": "faq_shaft_quenching", "description": "FAQ: 主轴调质",               "readOnly": true },
+    { "name": "faq_shaft_custom",    "description": "FAQ: 主轴尺寸定制",           "readOnly": true },
+    { "name": "faq_housing_custom",  "description": "FAQ: 壳体尺寸定制",           "readOnly": true },
+    { "name": "faq_printing",        "description": "FAQ: 壳体印字起订量",         "readOnly": true },
+    { "name": "faq_paint_color",     "description": "FAQ: 喷漆颜色定制",           "readOnly": true },
+    { "name": "faq_topcoat",         "description": "FAQ: 只喷面漆不喷底漆",       "readOnly": true },
+    { "name": "faq_tax_shipping",    "description": "FAQ: 报价含税含运费",         "readOnly": true },
+    { "name": "faq_warranty",        "description": "FAQ: 质保期",                 "readOnly": true },
+    { "name": "faq_temperature",     "description": "FAQ: 工作温度范围",           "readOnly": true }
+  ]
+}
