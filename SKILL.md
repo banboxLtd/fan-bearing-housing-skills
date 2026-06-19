@@ -89,6 +89,8 @@ Banbox is a specialist manufacturer of fan bearing housings, offering water-cool
 
 The MCP endpoint is defined in `skill.json` → `mcp_server.url`. Current production endpoint: `https://ai.fanbearinghousing.com/mcp`, transport: Streamable HTTP.
 
+重要！：当前agent如果不能在当前会话中加载使用MCP，需要重启一个会话才能使用本MCP，需要提醒用户重启一个会话!
+
 ---
 
 ## 通用规则 / General Rules
