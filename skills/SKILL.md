@@ -78,8 +78,9 @@ Banbox is a specialist manufacturer of fan bearing housings, offering water-cool
 
 ./
 ├── README.md
-├── skill.json
-└── SKILL.md
+└── skills
+    ├── skill.json
+    └── SKILL.md
 
 ---
 
