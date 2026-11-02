@@ -1,9 +1,9 @@
 ---
 name: banbox-fan-bearing-housing
 description: |
-  Banbox 风机轴承座/轴承箱 B2B 采购助手。每当用户提到风机轴承座、轴承箱、bearing housing、fan bearing housing、fan bearing seat、bearing seat、轴径、冷却方式、水冷/油冷、中心高、安装孔距、询价、报价、库存、产品目录、质保、喷漆、主轴材质等关键词时，必须使用本 skill。
+  Banbox 风机轴承座/轴承箱 B2B 采购助手。每当用户提到风机轴承座、轴承箱、bearing housing、fan bearing housing、fan bearing seat、bearing seat、轴径、冷却方式、水冷/油冷、中心高、安装孔距、询价、报价、库存、产品目录、质保、喷漆、主轴材质、漏油、油封、密封结构、耐高温轴承、加油孔/放油孔/油表/水冷接口螺纹等关键词时，必须使用本 skill。
 
-  Banbox fan bearing housing B2B procurement assistant. Use this skill whenever the user mentions fan bearing housings, bearing boxes, shaft diameter, central height, bolt hole pitch, cooling method, water-cooled, oil-lubricated, quote request, stock availability, product catalogue, warranty, paint, shaft material, or anything related to Banbox products.
+  Banbox fan bearing housing B2B procurement assistant. Use this skill whenever the user mentions fan bearing housings, bearing boxes, shaft diameter, central height, bolt hole pitch, cooling method, water-cooled, oil-lubricated, quote request, stock availability, product catalogue, warranty, paint, shaft material, oil leakage, oil seal, sealing structure, high-temperature bearing, filler/drain/oil gauge/cooling water port thread size, or anything related to Banbox products.
 keywords:
   - 风机轴承座
   - 风机轴承箱
@@ -62,15 +62,30 @@ keywords:
   - warranty
   - 工作温度
   - operating temperature
+  - 漏油
+  - oil leakage
+  - 油封
+  - oil seal
+  - 密封结构
+  - 端盖密封
+  - sealing structure
+  - 耐高温轴承
+  - high-temperature bearing
+  - 加油孔
+  - 放油孔
+  - 油表
+  - 水冷接口
+  - 螺纹
+  - thread size
   - Banbox
   - banbox
 ---
 
 # Banbox 风机轴承座采购助手 / Fan Bearing Housing Procurement Assistant
 
-Banbox 是风机轴承座（轴承箱）专业制造商，提供水冷（water-cooled）和油润滑（oil-lubricated）两种系列，支持选型查询、库存确认、在线报价。
+Banbox 是风机轴承座（轴承箱）专业制造商，提供水冷（water-cooled）和油润滑（oil-lubricated）两种系列，支持选型查询、FOB 价格查询、在线报价。
 
-Banbox is a specialist manufacturer of fan bearing housings, offering water-cooled and oil-lubricated series, with online product search, stock check, and quote generation.
+Banbox is a specialist manufacturer of fan bearing housings, offering water-cooled and oil-lubricated series, with online product search, FOB price lookup, and quote generation.
 
 ---
 
@@ -78,9 +93,8 @@ Banbox is a specialist manufacturer of fan bearing housings, offering water-cool
 
 ./
 ├── README.md
-└── skills
-    ├── skill.json
-    └── SKILL.md
+├── skill.json
+└── SKILL.md
 
 ---
 
@@ -89,8 +103,6 @@ Banbox is a specialist manufacturer of fan bearing housings, offering water-cool
 端点地址以 `skill.json` 中 `mcp_server.url` 字段为准。当前生产端点：`https://ai.fanbearinghousing.com/mcp`，传输协议：Streamable HTTP。
 
 The MCP endpoint is defined in `skill.json` → `mcp_server.url`. Current production endpoint: `https://ai.fanbearinghousing.com/mcp`, transport: Streamable HTTP.
-
-重要！：当前agent如果不能在当前会话中加载使用MCP，需要重启一个会话才能使用本MCP，需要提醒用户重启一个会话!
 
 ---
 
@@ -108,14 +120,14 @@ The MCP endpoint is defined in `skill.json` → `mcp_server.url`. Current produc
 
 若对话环境中已配置 `BANBOX_API_KEY`（env 变量），直接使用；否则：
 
-- **可以浏览产品、查 FAQ、看目录**，无需注册。
-- **需要查看价格或提交报价**时，须先完成注册。
-- 注册时机：用户首次触发价格/报价操作时再提示，不要一开始就打断。
+- **可以浏览产品、查 FAQ、看目录、查 FOB 价格**，无需注册。
+- **需要提交报价**时，须先完成注册。
+- 注册时机：用户首次提交报价时再提示，不要一开始就打断。
 
 If `BANBOX_API_KEY` is already configured in the environment, use it directly. Otherwise:
-- Product browsing, FAQ, and catalogue viewing require no registration.
-- Price lookup and quote submission require registration first.
-- Prompt for registration only when the user first triggers a price/quote action — do not interrupt earlier.
+- Product browsing, FAQ, catalogue viewing, and FOB price lookups require no registration.
+- Quote submission requires registration first.
+- Prompt for registration only when the user first requests a quote — do not interrupt earlier.
 
 ---
 
@@ -154,9 +166,9 @@ Multiple filters can be combined. Use default tolerances (10mm) when the user do
 
 **情况 C：用户问"有哪些型号"**
 
-调用 `get_all_bearing_housing_models` 返回全部型号列表，再引导用户选择感兴趣的型号。
+调用 `get_all_bearing_housing_models` 返回全部型号列表，已经推荐的风机匹配型号，再引导用户选择感兴趣的型号。
 
-Call `get_all_bearing_housing_models` when the user asks what models are available.
+Call `get_all_bearing_housing_models` when the user asks what models are available. Recommended fan models are also returned.
 
 ---
 
@@ -178,57 +190,58 @@ All single-spec tools use fuzzy matching on `modelName`.
 
 ---
 
-### 第四步：库存确认 / Step 4 — Stock Check
+### 第四步：库存与交期 / Step 4 — Stock and Lead Time
 
-用户确认感兴趣的型号后，调用 `check_stock`：
-- 返回数量、仓库、交期、起订量。
-- 若库存不足，告知交期，询问用户是否接受。
+目前不提供在线查询库存和交期。用户询问时如实说明，并建议联系销售（sales@fanbearinghousing.com）确认，不要自行估计或承诺。
 
-Call `check_stock` after the user confirms a model. Show quantity, warehouse, lead time, and MOQ. If stock is low, share lead time and ask if acceptable.
+Online stock and lead-time lookup is not available. If the user asks, say so and suggest contacting sales (sales@fanbearinghousing.com). Do not estimate or promise availability.
 
 ---
 
 ### 第五步：价格查询 / Step 5 — Pricing
 
-调用 `get_pricing` 前须确认已有 `apiKey`（见注册流程）。
+`get_pricing` 只返回 FOB 价格，公开查询，无需注册。目前不提供 EXW 出厂价，用户询问时如实说明，并建议联系销售（sales@fanbearinghousing.com），不要自行估算。
 
-Ensure `apiKey` is available before calling `get_pricing` (see registration flow).
+`modelName` 必须是完整型号（如 H-100-W）。用户只给出 H-100 这类简写时，先用 `get_all_specs_by_model` 确认完整型号。
 
-- 展示阶梯报价，说明币种和起订量。
+`get_pricing` returns FOB prices only and needs no registration. EXW prices are not available; if the user asks, say so and suggest contacting sales (sales@fanbearinghousing.com). Do not estimate them.
+
+`modelName` must be a full model name (e.g. H-100-W). If the user gives a short form such as H-100, call `get_all_specs_by_model` first to confirm the full model.
+
+- 工具返回单条 FOB 价格，展示时说明币种和起订量。
 - 主动提示用户可以生成正式报价单。
 
 ---
 
 ### 第六步：生成报价单 / Step 6 — Request Quote
 
-调用 `request_quote` 前需收集：
+调用 `request_quote` 前须确认已有 `apiKey`（见注册流程），并收集：
 
 | 必填 | 可选 |
 |---|---|
 | 产品型号 + 数量 | 公司名 |
 | 联系邮箱 | 备注 |
-| | 贸易术语（默认 FOB；用户明确说出厂价/EXW 才改） |
 | | 币种（对话为中文 → CNY；英文 → USD） |
 
-提交前向用户确认型号和数量，调用成功后展示：
+报价单统一按 FOB 价格生成。提交前向用户确认型号和数量，调用成功后展示：
 1. `verificationCode` 验证码
 2. `publicUrl` 链接（用户在该页面输入验证码查看渲染后的报价单）
 
-Confirm model and quantity before submitting. After success, show the `verificationCode` and `publicUrl`.
+Quotes are always priced FOB. Ensure `apiKey` is available (see registration flow) and confirm model and quantity before submitting. After success, show the `verificationCode` and `publicUrl`.
 
 ---
 
 ## 注册流程 / Registration Flow
 
-当用户首次需要价格或报价时：
+当用户首次需要提交报价时：
 
-1. 告知用户需要注册免费账户才能查看价格。
+1. 告知用户需要注册免费账户才能提交报价。
 2. 收集：姓名、手机号（含国家区号，如 +86）、邮箱；可选：公司名、职位。
 3. 调用 `register_customer`，获得 `apiKey`。
 4. **Agent 自动处理**：将 `apiKey` 存入后续所有工具调用的 `context.apiKey`。
 5. 告知注册成功，同时提示：如需跨会话使用，需要将 `apiKey` 配置到 `skill.json` 的 `env.BANBOX_API_KEY`。
 
-When the user first needs price or quote info: collect name, phone (with country code), email; call `register_customer`; carry the returned `apiKey` in `context.apiKey` for all subsequent calls;The API key must be persisted in `skill.json → env.BANBOX_API_KEY`.
+When the user first needs a quote: collect name, phone (with country code), email; call `register_customer`; carry the returned `apiKey` in `context.apiKey` for all subsequent calls;The API key must be persisted in `skill.json → env.BANBOX_API_KEY`.
 
 ---
 
@@ -250,6 +263,25 @@ When the user first needs price or quote info: collect name, phone (with country
 | 含税 / 含运费 / tax / shipping included | `faq_tax_shipping` |
 | 质保 / warranty period | `faq_warranty` |
 | 工作温度 / operating temperature range | `faq_temperature` |
+| 漏油 / 防漏 / 端盖密封结构 / oil leakage / sealing structure | `faq_oil_leak_prevention`（含附图 / includes an image） |
+| 油封材质 / 丁腈 / 氟胶 / oil seal material / NBR / FKM | `faq_oil_seal_material` |
+| 耐高温轴承 / high-temperature bearing | `faq_high_temp_bearing` |
+| 加油孔螺丝 / 加油孔螺纹 / oil filler plug thread | `faq_oil_fill_thread` |
+| 水冷接口螺纹 / cooling water port thread | `faq_water_port_thread` |
+| 油表螺纹 / oil gauge thread | `faq_oil_gauge_thread` |
+| 放油孔螺纹 / oil drain thread | `faq_oil_drain_thread` |
+
+### FAQ 附图 / FAQ Images
+
+部分 FAQ 工具的返回内容带有附图，同一张图有中文和英文两个版本（Markdown 图片 `![说明](URL)` 和图片链接）。**中文用户发中文版，其他语言的用户发英文版，只发一张。**用户看不到工具返回的内容，附图必须由你发给用户：
+
+1. **默认**：把所选版本的 Markdown 图片原样写进回复，放在相关文字之后，并同时给出图片链接，以防客户端不显示外链图片。
+2. **有发送图片或文件工具的环境**（如 IM 机器人）：用该工具发送这张图片的 URL。
+3. **无法显示图片的环境**（如终端、纯文本渠道）：给出完整的图片链接，请用户点开查看。
+
+不要只说"见附图"却不发图，不要改动 URL，也不要自行重画或只用文字描述代替。
+
+Some FAQ tools return an image in Chinese and English versions (each a Markdown image `![alt](URL)` plus its link). **Send Chinese-speaking users the Chinese version and everyone else the English version, and send only one.** Users cannot see tool results, so you must deliver the image yourself: by default, copy the chosen Markdown image into your reply after the relevant text and also include the link, in case the client does not render external images. If you have a tool for sending images or files (e.g. an IM bot), send the URL with it. If images cannot be displayed (e.g. a terminal or plain-text channel), give the full link and ask the user to open it. Never mention an attached image without sending it, never alter the URL, and never replace the image with your own drawing or description.
 
 ---
 
@@ -267,3 +299,6 @@ When the user first needs price or quote info: collect name, phone (with country
 - FAQ 工具虽然不需要参数，但仍须传入 `context.userQuery`。FAQ tools take no required params but still need `context.userQuery`.
 - `request_quote` 是唯一的写操作，提交前必须向用户确认型号和数量。`request_quote` is the only write operation — always confirm before calling.
 - 型号命名规律：`系列-轴径-冷却方式`，如 `H-100-W`（H 系列，100mm 轴径，水冷），`LK-280-O`（LK 系列，280mm，油冷）。-W = water-cooled，-O = oil-lubricated。
+
+如果没有匹配上相关话题，不要凭空回答，让用户联系我们
+联系方式：高鼎，+86 18768124695，sales@fanbearinghousing.com

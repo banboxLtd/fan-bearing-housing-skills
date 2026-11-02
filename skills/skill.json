@@ -23,10 +23,12 @@
     "主轴", "shaft", "壳体", "housing", "喷漆", "paint",
     "调质", "heat treatment", "订制", "custom",
     "质保", "warranty", "工作温度", "operating temperature",
+    "漏油", "oil leakage", "油封", "oil seal", "密封结构", "端盖密封", "sealing structure",
+    "耐高温轴承", "high-temperature bearing", "加油孔", "放油孔", "油表", "水冷接口", "螺纹", "thread size",
     "Banbox", "banbox"
   ],
 
-  "brand_prompt": "你是 Banbox 风机轴承座的专业采购助手。回答风格：专业、简洁、像一位熟悉产品的工程师销售，而非客服机器人。遇到技术问题直接给出参数，遇到商务问题主动推进到下一步（报价/库存确认）。英文对话时保持同样风格。",
+  "brand_prompt": "你是 Banbox 风机轴承座的专业采购助手。回答风格：专业、简洁、像一位熟悉产品的工程师销售，而非客服机器人。遇到技术问题直接给出参数，遇到商务问题主动推进到下一步（报价）。英文对话时保持同样风格。",
 
   "tools": [
     {
@@ -75,21 +77,16 @@
       "readOnly": true
     },
     {
-      "name": "check_stock",
-      "description": "查询库存数量、仓库、交期、起订量",
-      "readOnly": true
-    },
-    {
       "name": "get_pricing",
-      "description": "获取阶梯价格（需注册）",
+      "description": "获取单条 FOB 价格，公开查询，无需注册",
       "readOnly": true,
-      "requiresAuth": true
+      "requiresAuth": false
     },
     {
       "name": "request_quote",
-      "description": "提交报价请求，返回验证码和报价单链接",
+      "description": "提交报价请求，返回验证码和报价单链接（需注册）",
       "readOnly": false,
-      "requiresAuth": false
+      "requiresAuth": true
     },
     {
       "name": "register_customer",
@@ -108,6 +105,13 @@
     { "name": "faq_topcoat",         "description": "FAQ: 只喷面漆不喷底漆",       "readOnly": true },
     { "name": "faq_tax_shipping",    "description": "FAQ: 报价含税含运费",         "readOnly": true },
     { "name": "faq_warranty",        "description": "FAQ: 质保期",                 "readOnly": true },
-    { "name": "faq_temperature",     "description": "FAQ: 工作温度范围",           "readOnly": true }
+    { "name": "faq_temperature",     "description": "FAQ: 工作温度范围",           "readOnly": true },
+    { "name": "faq_oil_leak_prevention", "description": "FAQ: 防漏油措施与端盖密封结构（含中英文示意图）", "readOnly": true },
+    { "name": "faq_oil_seal_material",   "description": "FAQ: 油封材质",               "readOnly": true },
+    { "name": "faq_high_temp_bearing",   "description": "FAQ: 耐高温轴承",             "readOnly": true },
+    { "name": "faq_oil_fill_thread",     "description": "FAQ: 加油孔螺丝规格",         "readOnly": true },
+    { "name": "faq_water_port_thread",   "description": "FAQ: 水冷接口螺纹",           "readOnly": true },
+    { "name": "faq_oil_gauge_thread",    "description": "FAQ: 油表螺纹",               "readOnly": true },
+    { "name": "faq_oil_drain_thread",    "description": "FAQ: 放油孔螺纹",             "readOnly": true }
   ]
 }
