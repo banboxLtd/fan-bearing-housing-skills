@@ -10,13 +10,13 @@
 
 直接把下面这句话发给你的 AI 助手：
 
-> 帮我安装 Banbox 风机轴承座 Skill，仓库地址：`https://github.com/banbox/banbox-fan-bearing-housing-skill`
+> 帮我安装 Banbox 风机轴承座 Skill，仓库地址：`https://github.com/banboxLtd/fan-bearing-housing-skills`
 
 Agent 会自动克隆仓库、读取 `skill.json` 连接 MCP server，下次启动即可使用。
 
 Send this to your AI agent:
 
-> Install the Banbox fan bearing housing skill from: `https://github.com/banbox/banbox-fan-bearing-housing-skill`
+> Install the Banbox fan bearing housing skill from: `https://github.com/banboxLtd/fan-bearing-housing-skills`
 
 ---
 
@@ -25,7 +25,7 @@ Send this to your AI agent:
 ### Claude Code
 
 ```bash
-git clone https://github.com/banbox/banbox-fan-bearing-housing-skill.git \
+git clone https://github.com/banboxLtd/fan-bearing-housing-skills.git \
   ~/.claude/skills/banbox-fan-bearing-housing-skill
 ```
 
