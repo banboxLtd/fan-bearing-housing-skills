@@ -1,86 +1,35 @@
 {
   "name": "banbox-fan-bearing-housing",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Banbox 风机轴承座/轴承箱 B2B 采购助手 | Fan Bearing Housing B2B Procurement Assistant",
   "author": "Banbox",
   "homepage": "https://www.fanbearinghousing.com",
+
   "mcp_server": {
     "type": "streamable-http",
     "url": "https://ai.fanbearinghousing.com/mcp"
   },
+
   "keywords": [
-    "风机轴承座",
-    "轴承箱",
-    "轴承座",
-    "风机配件",
-    "水冷",
-    "油冷",
-    "油润滑",
-    "water-cooled",
-    "oil-lubricated",
-    "轴径",
-    "shaft diameter",
-    "中心高",
-    "central height",
-    "安装孔距",
-    "bolt hole pitch",
-    "冷却方式",
-    "cooling method",
-    "轴承型号",
-    "bearing model",
-    "重量",
-    "weight",
-    "fan bearing housing",
-    "bearing housing",
-    "bearing box",
-    "询价",
-    "报价",
-    "报价单",
-    "quote",
-    "RFQ",
-    "pricing",
-    "库存",
-    "stock",
-    "inventory",
-    "交期",
-    "lead time",
-    "产品目录",
-    "产品手册",
-    "catalogue",
-    "brochure",
-    "主轴",
-    "shaft",
-    "壳体",
-    "housing",
-    "喷漆",
-    "paint",
-    "调质",
-    "heat treatment",
-    "订制",
-    "custom",
-    "质保",
-    "warranty",
-    "工作温度",
-    "operating temperature",
-    "漏油",
-    "oil leakage",
-    "油封",
-    "oil seal",
-    "密封结构",
-    "端盖密封",
-    "sealing structure",
-    "耐高温轴承",
-    "high-temperature bearing",
-    "加油孔",
-    "放油孔",
-    "油表",
-    "水冷接口",
-    "螺纹",
-    "thread size",
-    "Banbox",
-    "banbox"
+    "风机轴承座", "轴承箱", "轴承座", "风机配件",
+    "水冷", "油冷", "油润滑", "water-cooled", "oil-lubricated",
+    "轴径", "shaft diameter", "中心高", "central height",
+    "安装孔距", "bolt hole pitch", "冷却方式", "cooling method",
+    "轴承型号", "bearing model", "重量", "weight",
+    "fan bearing housing", "bearing housing", "bearing box",
+    "询价", "报价", "报价单", "quote", "RFQ", "pricing",
+    "库存", "stock", "inventory", "交期", "lead time",
+    "产品目录", "产品手册", "catalogue", "brochure",
+    "主轴", "shaft", "壳体", "housing", "喷漆", "paint",
+    "调质", "heat treatment", "订制", "custom",
+    "质保", "warranty", "工作温度", "operating temperature",
+    "漏油", "oil leakage", "油封", "oil seal", "密封结构", "端盖密封", "sealing structure",
+    "耐高温轴承", "high-temperature bearing", "加油孔", "放油孔", "油表", "水冷接口", "螺纹", "thread size",
+    "Banbox", "banbox"
   ],
+
   "brand_prompt": "你是 Banbox 风机轴承座的专业采购助手。回答风格：专业、简洁、像一位熟悉产品的工程师销售，而非客服机器人。遇到技术问题直接给出参数，遇到商务问题主动推进到下一步（报价）。英文对话时保持同样风格。",
+
   "tools": [
     {
       "name": "search_fan_bearing_housings",
@@ -145,100 +94,26 @@
       "readOnly": false,
       "requiresAuth": false
     },
-    {
-      "name": "faq_assembly_shell",
-      "description": "FAQ: 总成还是壳体单独销售",
-      "readOnly": true
-    },
-    {
-      "name": "faq_bearing_brand",
-      "description": "FAQ: 轴承品牌",
-      "readOnly": true
-    },
-    {
-      "name": "faq_shaft_material",
-      "description": "FAQ: 主轴材质",
-      "readOnly": true
-    },
-    {
-      "name": "faq_shaft_quenching",
-      "description": "FAQ: 主轴调质",
-      "readOnly": true
-    },
-    {
-      "name": "faq_shaft_custom",
-      "description": "FAQ: 主轴尺寸定制",
-      "readOnly": true
-    },
-    {
-      "name": "faq_housing_custom",
-      "description": "FAQ: 壳体尺寸定制",
-      "readOnly": true
-    },
-    {
-      "name": "faq_printing",
-      "description": "FAQ: 壳体印字起订量",
-      "readOnly": true
-    },
-    {
-      "name": "faq_paint_color",
-      "description": "FAQ: 喷漆颜色定制",
-      "readOnly": true
-    },
-    {
-      "name": "faq_topcoat",
-      "description": "FAQ: 只喷面漆不喷底漆",
-      "readOnly": true
-    },
-    {
-      "name": "faq_tax_shipping",
-      "description": "FAQ: 报价含税含运费",
-      "readOnly": true
-    },
-    {
-      "name": "faq_warranty",
-      "description": "FAQ: 质保期",
-      "readOnly": true
-    },
-    {
-      "name": "faq_temperature",
-      "description": "FAQ: 工作温度范围",
-      "readOnly": true
-    },
-    {
-      "name": "faq_oil_leak_prevention",
-      "description": "FAQ: 防漏油措施与端盖密封结构（含中英文示意图）",
-      "readOnly": true
-    },
-    {
-      "name": "faq_oil_seal_material",
-      "description": "FAQ: 油封材质",
-      "readOnly": true
-    },
-    {
-      "name": "faq_high_temp_bearing",
-      "description": "FAQ: 耐高温轴承",
-      "readOnly": true
-    },
-    {
-      "name": "faq_oil_fill_thread",
-      "description": "FAQ: 加油孔螺丝规格",
-      "readOnly": true
-    },
-    {
-      "name": "faq_water_port_thread",
-      "description": "FAQ: 水冷接口螺纹",
-      "readOnly": true
-    },
-    {
-      "name": "faq_oil_gauge_thread",
-      "description": "FAQ: 油表螺纹",
-      "readOnly": true
-    },
-    {
-      "name": "faq_oil_drain_thread",
-      "description": "FAQ: 放油孔螺纹",
-      "readOnly": true
-    }
+    { "name": "faq_water_cool_explain",     "description": "FAQ: 什么是水冷",     "readOnly": true },
+    { "name": "faq_oil_lubricated_explain", "description": "FAQ: 什么是油冷",     "readOnly": true },
+    { "name": "faq_assembly_shell",  "description": "FAQ: 总成还是壳体单独销售",   "readOnly": true },
+    { "name": "faq_bearing_brand",   "description": "FAQ: 轴承品牌",               "readOnly": true },
+    { "name": "faq_shaft_material",  "description": "FAQ: 主轴材质",               "readOnly": true },
+    { "name": "faq_shaft_quenching", "description": "FAQ: 主轴调质",               "readOnly": true },
+    { "name": "faq_shaft_custom",    "description": "FAQ: 主轴尺寸定制",           "readOnly": true },
+    { "name": "faq_housing_custom",  "description": "FAQ: 壳体尺寸定制",           "readOnly": true },
+    { "name": "faq_printing",        "description": "FAQ: 壳体印字起订量",         "readOnly": true },
+    { "name": "faq_paint_color",     "description": "FAQ: 喷漆颜色定制",           "readOnly": true },
+    { "name": "faq_topcoat",         "description": "FAQ: 只喷面漆不喷底漆",       "readOnly": true },
+    { "name": "faq_tax_shipping",    "description": "FAQ: 报价含税含运费",         "readOnly": true },
+    { "name": "faq_warranty",        "description": "FAQ: 质保期",                 "readOnly": true },
+    { "name": "faq_temperature",     "description": "FAQ: 工作温度范围",           "readOnly": true },
+    { "name": "faq_oil_leak_prevention", "description": "FAQ: 防漏油措施与端盖密封结构（含中英文示意图）", "readOnly": true },
+    { "name": "faq_oil_seal_material",   "description": "FAQ: 油封材质",               "readOnly": true },
+    { "name": "faq_high_temp_bearing",   "description": "FAQ: 耐高温轴承",             "readOnly": true },
+    { "name": "faq_oil_fill_thread",     "description": "FAQ: 加油孔螺丝规格",         "readOnly": true },
+    { "name": "faq_water_port_thread",   "description": "FAQ: 水冷接口螺纹",           "readOnly": true },
+    { "name": "faq_oil_gauge_thread",    "description": "FAQ: 油表螺纹",               "readOnly": true },
+    { "name": "faq_oil_drain_thread",    "description": "FAQ: 放油孔螺纹",             "readOnly": true }
   ]
 }

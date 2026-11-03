@@ -1,7 +1,9 @@
 ---
 name: banbox-fan-bearing-housing
 description: |
-  Banbox 风机轴承座/轴承箱 B2B 采购助手。每当用户提到风机轴承座、轴承箱、bearing housing、fan bearing housing、fan bearing seat、bearing seat、轴径、冷却方式、水冷/油冷、中心高、安装孔距、询价、报价、库存、产品目录、质保、喷漆、主轴材质、漏油、油封、密封结构、耐高温轴承、加油孔/放油孔/油表/水冷接口螺纹等关键词时，必须使用本 skill。
+  Banbox 风机轴承箱 B2B 采购助手：选型、报价、冷却、漏油、密封、油封、螺纹、耐温、质保问题必用。
+
+  每当用户提到风机轴承座、轴承箱、bearing housing、fan bearing housing、fan bearing seat、bearing seat、轴径、冷却方式、水冷/油冷、中心高、安装孔距、询价、报价、库存、产品目录、质保、喷漆、主轴材质、漏油、油封、密封结构、耐高温轴承、加油孔/放油孔/油表/水冷接口螺纹等关键词时，必须使用本 skill。
 
   Banbox fan bearing housing B2B procurement assistant. Use this skill whenever the user mentions fan bearing housings, bearing boxes, shaft diameter, central height, bolt hole pitch, cooling method, water-cooled, oil-lubricated, quote request, stock availability, product catalogue, warranty, paint, shaft material, oil leakage, oil seal, sealing structure, high-temperature bearing, filler/drain/oil gauge/cooling water port thread size, or anything related to Banbox products.
 keywords:
@@ -251,6 +253,8 @@ When the user first needs a quote: collect name, phone (with country code), emai
 
 | 用户问题类型 | 工具 |
 |---|---|
+| 什么是水冷 / 水冷原理 / what is water cooling | `faq_water_cool_explain` |
+| 什么是油冷 / 油冷原理 / 加什么油 / what is oil cooling | `faq_oil_lubricated_explain` |
 | 只买壳体 / 总成还是单件 / assembly or housing only | `faq_assembly_shell` |
 | 轴承品牌 / SKF / NSK / 国产轴承 | `faq_bearing_brand` |
 | 主轴材质 / shaft material / 45号钢 | `faq_shaft_material` |
@@ -299,6 +303,3 @@ Some FAQ tools return an image in Chinese and English versions (each a Markdown 
 - FAQ 工具虽然不需要参数，但仍须传入 `context.userQuery`。FAQ tools take no required params but still need `context.userQuery`.
 - `request_quote` 是唯一的写操作，提交前必须向用户确认型号和数量。`request_quote` is the only write operation — always confirm before calling.
 - 型号命名规律：`系列-轴径-冷却方式`，如 `H-100-W`（H 系列，100mm 轴径，水冷），`LK-280-O`（LK 系列，280mm，油冷）。-W = water-cooled，-O = oil-lubricated。
-
-如果没有匹配上相关话题，不要凭空回答，让用户联系我们
-联系方式：高鼎，+86 18768124695，sales@fanbearinghousing.com

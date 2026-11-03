@@ -74,7 +74,7 @@ Product lookups and FOB prices are public. Quote requests require a free account
 | 下载产品目录 PDF | Download product catalogue |
 | 查看 FOB 价格（无需注册）| View FOB prices (no registration required) |
 | 在线生成报价单（需注册）| Generate formal quote online (registration required) |
-| 常见问题解答（19项）| FAQ (19 topics) |
+| 常见问题解答（21项）| FAQ (21 topics) |
 
 ---
 
